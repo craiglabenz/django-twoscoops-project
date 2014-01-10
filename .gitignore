@@ -16,3 +16,6 @@ build
 
 # Logs:
 *.log
+
+# Mac-specific file
+.DS_STORE
