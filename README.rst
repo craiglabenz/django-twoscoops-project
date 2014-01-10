@@ -1,8 +1,8 @@
 ========================
-django-twoscoops-project
+django-threescoops-project
 ========================
 
-A project template for Django 1.5.
+A project template for Django 1.6.1
 
 To use this project follow these steps:
 
