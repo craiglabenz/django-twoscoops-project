@@ -139,7 +139,40 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+
+    # AllAuth
+    "allauth.account.context_processors.account",
+    "allauth.socialaccount.context_processors.socialaccount",
 )
+
+
+########## ALLAUTH CONFIGURATION
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'SCOPE': ['email', 'publish_stream'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'METHOD': 'js_sdk',
+        # 'LOCALE_FUNC': 'path.to.callable',
+        'VERIFIED_EMAIL': True
+    }
+}
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "optional"
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "FILL ME IN"
+ACCOUNT_PASSWORD_MIN_LENGTH = 6
+
+LOGIN_REDIRECT_URL = '/profiles/me'
+########## ALLAUTH CONFIGURATION
+
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
 TEMPLATE_LOADERS = (
@@ -191,11 +224,16 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     # Database migration helpers:
     'south',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
 )
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
     'persons',
+    'profiles',
 )
 
 AUTH_USER_MODEL = 'persons.Person'
@@ -212,7 +250,7 @@ SUIT_CONFIG = {
     'HEADER_TIME_FORMAT': 'h:i A',
     'MENU_ICONS': {
         'persons': 'icon-user',
-        'socialaccount': 'icon-user',
+        'socialaccount': 'icon-list',
         'account': 'icon-ok-sign'
 
     },

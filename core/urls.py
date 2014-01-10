@@ -1,20 +1,22 @@
+# Django
 from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
-
-# Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-admin.autodiscover()
 
+# Local Apps
+from profiles import views as profile_views
+
+admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', TemplateView.as_view(template_name='base.html')),
 
-    # Examples:
-    # url(r'^$', '{{ project_name }}.views.home', name='home'),
-    # url(r'^{{ project_name }}/', include('{{ project_name }}.foo.urls')),
+    # General
+    url(r'^logout$', profile_views.logout_view, name='logout'),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    # AllAuth
+    (r'^accounts/', include('allauth.urls')),
+    (r'^profiles/', include('profiles.urls')),
 
-    # Uncomment the next line to enable the admin:
+    # Admin
     url(r'^admin/', include(admin.site.urls)),
 )

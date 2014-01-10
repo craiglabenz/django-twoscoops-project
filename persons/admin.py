@@ -10,7 +10,7 @@ class PersonAdmin(BaseModelAdmin):
     list_display = ['id', 'username', 'is_superuser', 'email', 'created']
     fieldsets = (
         ('Basic', {
-            'fields': ('id', 'username', 'email',)
+            'fields': ('id', 'username', 'first_name', 'last_name', 'email')
         }),
         ('Permissions', {
             'fields': ('is_active', 'is_staff', 'is_superuser',)

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <h1 class="pull-left">Hello, {{ request.user.callable }}!</h1>
+        {% if user.social_accounts %}
+            <img class="pull-right" src="{{ user.image_url }}?height=120&width=120" />
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

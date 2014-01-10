@@ -22,3 +22,10 @@ class Person(AbstractUser, BaseModel):
         db_table = 'persons'
         verbose_name = 'Person'
         verbose_name_plural = 'Persons'
+
+    def callable(self):
+        full_name = self.get_full_name()
+        if not bool(full_name):
+            return self.username
+        else:
+            return full_name
